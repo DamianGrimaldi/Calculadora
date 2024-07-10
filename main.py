@@ -1,13 +1,40 @@
 import pygame
 import sys
-from pantalla.pantall import *
+from pantalla.pantalla import *
+from boton.boton import *
 
 pygame.init()
 
 ancho = 500
 alto = 600
 
+#objeto pantalla:
 screen = Pantalla(ancho,alto)
+
+#boton:
+ancho_boton, alto_boton = ancho//4, alto//5
+matriz_posicion_botones = [
+    [(ancho_boton*0,alto_boton*1),(ancho_boton*1,alto_boton*1),(ancho_boton*2,alto_boton*1),(ancho_boton*3,alto_boton*1)],
+    [(ancho_boton*0,alto_boton*2),(ancho_boton*1,alto_boton*2),(ancho_boton*2,alto_boton*2),(ancho_boton*3,alto_boton*2)],
+    [(ancho_boton*0,alto_boton*3),(ancho_boton*1,alto_boton*3),(ancho_boton*2,alto_boton*3),(ancho_boton*3,alto_boton*3)],
+    [(ancho_boton*0,alto_boton*4),(ancho_boton*1,alto_boton*4),(ancho_boton*2,alto_boton*4),(ancho_boton*3,alto_boton*4)]
+]
+botones = [
+    ["7","8","9","/"],
+    ["4","5","6","X"],
+    ["1","2","3","+"],
+    ["0",".","-","="]
+]
+color_inactivo = (44,44,144)
+color_activo = (144,44,44)
+
+for i,lista in enumerate(matriz_posicion_botones):
+    for j, posicion in enumerate(lista):
+        boton = Boton(posicion[0],posicion[1],ancho_boton,alto_boton,color_inactivo,color_activo,botones[i][j])
+        botones[i][j] = boton
+
+mouse = pygame.mouse
+
 pygame.display.set_caption("Cliente Api")
 reloj = pygame.time.Clock()
 
@@ -16,9 +43,15 @@ def manejo_eventos():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            click = event.button
+            for boton_lista in botones:
+                    for boton in boton_lista:
+                        boton.accion(mouse,click)
 
 def actualizar_pantalla():
-    screen.dibujar()
+    
+    screen.dibujar(botones,mouse)
     
     pygame.display.flip()
 
