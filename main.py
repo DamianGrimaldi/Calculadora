@@ -47,7 +47,10 @@ def manejo_eventos():
             click = event.button
             for boton_lista in botones:
                     for boton in boton_lista:
-                        boton.accion(mouse,click)
+                        boton.accion(mouse,click,screen)
+        elif event.type == pygame.KEYDOWN:
+            key = event.key
+            screen.manejo_teclado(key)
 
 def actualizar_pantalla():
     

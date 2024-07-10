@@ -11,6 +11,11 @@ class Boton():
         self.color_activo = color_activo
         self.myFond = pygame.font.SysFont('Times New Roman', 25)
         self.valor = valor
+
+    def renderizar_texto(self,screen):
+        texto = self.myFond.render(self.valor,True,"black")
+        posicion = (((self.posicion_x * 2) + self.ancho) / 2, ((self.posicion_y * 2) + self.alto) /2)
+        screen.blit(texto,posicion)
     
     def comprobacion(self,mouse):
         mouse_posicion = mouse.get_pos()
@@ -19,10 +24,13 @@ class Boton():
         
         return False
 
-    def accion(self,mouse,click):
+    def accion(self,mouse,click,screen):
         if self.comprobacion(mouse):
             if click == 1:
-                print(self.valor)
+                if self.valor == "X":
+                    screen.input += "*"
+                else:
+                    screen.input += self.valor
 
     def dibujar(self,screen,mouse):
 
@@ -33,3 +41,6 @@ class Boton():
 
         else:
             pygame.draw.rect(screen, self.color_inactivo, (self.posicion_x+5,self.posicion_y+5,self.ancho-5,self.alto-5))
+        
+        
+        self.renderizar_texto(screen)
