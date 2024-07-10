@@ -1,11 +1,13 @@
 import pygame
 
 class Pantalla():
-    def __init__(self,ancho,alto) -> None:
+    def __init__(self,ancho,alto, tamaño_y) -> None:
         self.ancho = ancho
         self.alto = alto
+        self.tamaño_y = tamaño_y
+        self.tamaño_letra = 25
         self.input = ""
-        self.myFond = pygame.font.SysFont('Times New Roman', 25)
+        self.myFond = pygame.font.SysFont('Times New Roman', self.tamaño_letra)
         self.respuesta = "0"
         self.reemplazo = {
             "[0]": "0", "[1]": "1", "[2]": "2", "[3]": "3", "[4]": "4",
@@ -16,7 +18,7 @@ class Pantalla():
 
     def mostrar(self):
         texto = self.myFond.render(self.input,True,"black")
-        posicion = ((10,95))
+        posicion = ((10,self.tamaño_y - self.tamaño_letra))
         self.screen.blit(texto,posicion)
 
     def manejo_respuesta(self):

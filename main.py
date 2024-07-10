@@ -7,12 +7,12 @@ pygame.init()
 
 ancho = 500
 alto = 600
+ancho_boton, alto_boton = ancho//4, alto//5
 
 #objeto pantalla:
-screen = Pantalla(ancho,alto)
+screen = Pantalla(ancho,alto,alto_boton)
 
 #boton:
-ancho_boton, alto_boton = ancho//4, alto//5
 matriz_posicion_botones = [
     [(ancho_boton*0,alto_boton*1),(ancho_boton*1,alto_boton*1),(ancho_boton*2,alto_boton*1),(ancho_boton*3,alto_boton*1)],
     [(ancho_boton*0,alto_boton*2),(ancho_boton*1,alto_boton*2),(ancho_boton*2,alto_boton*2),(ancho_boton*3,alto_boton*2)],
@@ -21,11 +21,11 @@ matriz_posicion_botones = [
 ]
 botones = [
     ["7","8","9","/"],
-    ["4","5","6","X"],
+    ["4","5","6","*"],
     ["1","2","3","+"],
     ["0",".","-","="]
 ]
-color_inactivo = (44,44,144)
+color_inactivo = (144,144,144)
 color_activo = (144,44,44)
 
 for i,lista in enumerate(matriz_posicion_botones):
@@ -35,7 +35,7 @@ for i,lista in enumerate(matriz_posicion_botones):
 
 mouse = pygame.mouse
 
-pygame.display.set_caption("Cliente Api")
+pygame.display.set_caption("Calculadora")
 reloj = pygame.time.Clock()
 
 def manejo_eventos():
