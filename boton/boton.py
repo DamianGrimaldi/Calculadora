@@ -35,6 +35,9 @@ class Boton():
                         screen.input += self.valor
                 elif self.valor == "=":
                     screen.manejo_respuesta()
+                elif self.valor == ".":
+                    if screen.input and screen.input[-1] != ".":
+                        screen.input += self.valor
                 else:
                     screen.input += self.valor
 
