@@ -6,7 +6,7 @@ class Pantalla():
         self.alto = alto
         self.tamaño_y = tamaño_y
         self.tamaño_letra = 25
-        self.input = ""
+        self.input = "0"
         self.myFond = pygame.font.SysFont('Times New Roman', self.tamaño_letra)
         self.respuesta = "0"
         self.teclas_validas = [
@@ -54,7 +54,15 @@ class Pantalla():
         elif key == pygame.K_ESCAPE:
             self.input = "0"
         elif key_name in self.teclas_validas:
-            if key_name in self.reemplazo:
+            if key_name in  ["[+]","[*]","[/]","[-]"]:
+                if self.input and self.input[-1] in ["+","*","/","-"]:
+                        self.input = self.input[:-1] + self.reemplazo[key_name]
+                elif self.input:
+                    self.input += self.reemplazo[key_name]
+            elif key_name == "[.]":
+                if self.input and self.input[-1] != ".":
+                        self.input += self.reemplazo[key_name]
+            elif key_name in self.reemplazo:
                 self.input += self.reemplazo[key_name]
             else:
                 self.input +=  key_name
